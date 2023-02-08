@@ -35,6 +35,11 @@ jobs:
             - name: Install Dependencies
               run: "./scripts/layered.sh"
 
+            - name: Build, Package & Upload sourcemaps
+              run: "./scripts/ci_package.sh"
+              env:
+                  CSP_EXTRA_SOURCE: ${{ env.R2_PUBLIC_URL }}  
+
             - run: mv dist/element-*.tar.gz dist/develop.tar.gz
 
             - uses: actions/upload-artifact@v3
