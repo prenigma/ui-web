@@ -101,7 +101,7 @@ jobs:
               with:
                   apiToken: ${{ secrets.CF_PAGES_TOKEN }}
                   accountId: ${{ secrets.CF_PAGES_ACCOUNT_ID }}
-                  projectName: ui-web-develop
+                  projectName: ui-web
                   directory: _deploy
                   gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
