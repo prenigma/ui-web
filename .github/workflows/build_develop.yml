@@ -17,9 +17,9 @@ jobs:
         runs-on: ubuntu-latest
         environment: develop
         env:
-            R2_BUCKET: "element-web-develop"
+            R2_BUCKET: "ui-web-develop"
             R2_URL: ${{ secrets.CF_R2_S3_API }}
-            R2_PUBLIC_URL: "https://element-web-develop.element.io"
+            R2_PUBLIC_URL: "https://pub-2fb68355eb4b4736ab4422aaf848074c.r2.dev"
         steps:
             - uses: actions/checkout@v3
 
@@ -29,21 +29,6 @@ jobs:
 
             - name: Install Dependencies
               run: "./scripts/layered.sh"
-
-            - name: Build, Package & Upload sourcemaps
-              run: "./scripts/ci_package.sh"
-              env:
-                  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-                  SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-                  SENTRY_URL: ${{ secrets.SENTRY_URL }}
-                  SENTRY_ORG: element
-                  SENTRY_PROJECT: riot-web
-                  # We only deploy the latest bundles to Cloudflare Pages and use _redirects to fallback to R2 for
-                  # older ones. This redirect means that 'self' is insufficient in the CSP,
-                  # and we have to add the R2 URL.
-                  # Once Cloudflare redirects support proxying mode we will be able to ditch this.
-                  # See Proxying in support table at https://developers.cloudflare.com/pages/platform/redirects
-                  CSP_EXTRA_SOURCE: ${{ env.R2_PUBLIC_URL }}
 
             - run: mv dist/element-*.tar.gz dist/develop.tar.gz
 
@@ -106,7 +91,7 @@ jobs:
               with:
                   apiToken: ${{ secrets.CF_PAGES_TOKEN }}
                   accountId: ${{ secrets.CF_PAGES_ACCOUNT_ID }}
-                  projectName: element-web-develop
+                  projectName: ui-web-develop
                   directory: _deploy
                   gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
