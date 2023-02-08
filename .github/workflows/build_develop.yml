@@ -69,7 +69,7 @@ jobs:
               uses: lewagon/wait-on-check-action@v1.2.0
               with:
                   ref: ${{ github.sha }}
-                  running-workflow-name: "Build & Deploy develop.element.io"
+                  running-workflow-name: "Build & Deploy develop.webuielement.io"
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   wait-interval: 10
                   check-regexp: ^((?!SonarCloud|SonarQube|issue|board|label).)*$
