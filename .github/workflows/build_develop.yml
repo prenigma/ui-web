@@ -103,7 +103,7 @@ jobs:
                   accountId: ${{ secrets.CF_PAGES_ACCOUNT_ID }}
                   projectName: ui-web-git
                   directory: _deploy
-                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+                  gitHubToken: ${{ secrets.PAGES_GITHUB_TOKEN }}
 
             - run: |
                   echo "Deployed to ${{ steps.cfp.outputs.url }}" >> $GITHUB_STEP_SUMMARY
